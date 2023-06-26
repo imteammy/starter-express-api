@@ -6,10 +6,10 @@ exports.getAllHeroes = async (req, res, next) => {
         const hero = await Hero.find({})
 
         if (hero.length === 0) {
-            return ({ message: 'Heroes is empty.' })
+            return res.json({ message: 'Heroes is empty.' })
         }
 
-        return hero
+        return res.status(200).json(hero);
     } catch (error) {
         return error.message
     }
@@ -19,12 +19,12 @@ exports.findhero = async (req, res, next) => {
     const id = req.body.id
 
     if(!id || id == "") {
-        return res.send({message : "name is required"}); 
+        return res.send({message : "ID is required"}); 
     }
     try {
         const hero = await Hero.findOne({ _id : id });
         if(!hero) {
-            return res.send({message : "Hero not found!"});
+            return res.status(400).json({message : "Hero not found!"});
         }
         return res.send(hero);
     } catch (error) {
@@ -71,7 +71,7 @@ exports.update = async (req, res, next) => {
         });
 
         if (!updateResult) {
-            return res.status(404).json({ message: 'Hero not found.' });
+            return res.status(404).send('Hero not found.');
         };
 
         return res.json({
@@ -88,7 +88,7 @@ exports.delete = async (req, res, next) => {
     try {
         const deleteHero = await Hero.findOneAndDelete({ _id: id })
         if (!deleteHero) {
-            return res.status(404).json({ message: 'Hero not found.' })
+            return res.status(404).json({message : 'Find Hero by ID not found. Cannot delete'})
         }
 
         return res.json({ message: 'Hero deleted successfully.', data: deleteHero })

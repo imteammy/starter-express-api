@@ -6,7 +6,7 @@ exports.getAll = async (req, res, next) => {
         const r = await ComboHero.find()
 
         if (r.length === 0) {
-            return r
+            return { message: 'Heroes is empty.' }
         }
         return r
     } catch (error) {

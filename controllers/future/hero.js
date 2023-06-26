@@ -3,7 +3,7 @@ const { Hero } = require('../../models')
 
 exports.getAllHeroes = async (req, res, next) => {
     try {
-        const hero = await Hero.find()
+        const hero = await Hero.find({})
 
         if (hero.length === 0) {
             return ({ message: 'Heroes is empty.' })

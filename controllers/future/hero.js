@@ -71,7 +71,7 @@ exports.update = async (req, res, next) => {
         });
 
         if (!updateResult) {
-            return res.status(404).send('Hero not found.');
+            return res.status(400).send('Hero not found.');
         };
 
         return res.json({

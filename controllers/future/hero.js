@@ -24,7 +24,7 @@ exports.findhero = async (req, res, next) => {
     try {
         const hero = await Hero.findOne({ _id : id });
         if(!hero) {
-            return res.status(400).json({message : "Hero not found!"});
+            return res.json({message : "Hero not found!"});
         }
         return res.send(hero);
     } catch (error) {
@@ -38,9 +38,9 @@ exports.add = async (req, res, next) => {
     delete HeroData.token;
     try {
         const result = await Hero.create(HeroData)
-        return res.json({ message: 'Created new hero successfully.', data: result })
+        return res.status(200).json({ message: 'Created new hero successfully.', data: result })
     } catch (error) {
-        return res.status(400).json({ message: error.message })
+        return res.json({ message: error.message })
     }
 }
 exports.addMany = async (req, res, next) => {
@@ -54,9 +54,9 @@ exports.addMany = async (req, res, next) => {
     
     try {
       const r = await Hero.insertMany(result);
-      return res.json({ message: 'Created new hero successfully.', data: r });
+      return res.status(200).json({ message: 'Created new hero successfully.', data: r });
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.json({ message: error.message });
     }
 }
 exports.update = async (req, res, next) => {
@@ -71,10 +71,10 @@ exports.update = async (req, res, next) => {
         });
 
         if (!updateResult) {
-            return res.status(400).send('Hero not found.');
+            return res.send('Hero not found.');
         };
 
-        return res.json({
+        return res.status(200).json({
             message: 'Hero updated successfully.',
             data: updateResult
         });
@@ -88,11 +88,11 @@ exports.delete = async (req, res, next) => {
     try {
         const deleteHero = await Hero.findOneAndDelete({ _id: id })
         if (!deleteHero) {
-            return res.status(400).json({message : 'Find Hero by ID not found. Cannot delete'})
+            return res.json({message : 'Find Hero by ID not found. Cannot delete'})
         }
 
-        return res.json({ message: 'Hero deleted successfully.', data: deleteHero })
+        return res.status(200).json({ message: 'Hero deleted successfully.', data: deleteHero })
     } catch (error) {
-        return res.status(400).json({ message: error.message })
+        return res.json({ message: error.message })
     }
 }

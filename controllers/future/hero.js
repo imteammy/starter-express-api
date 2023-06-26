@@ -88,7 +88,7 @@ exports.delete = async (req, res, next) => {
     try {
         const deleteHero = await Hero.findOneAndDelete({ _id: id })
         if (!deleteHero) {
-            return res.status(404).json({message : 'Find Hero by ID not found. Cannot delete'})
+            return res.status(400).json({message : 'Find Hero by ID not found. Cannot delete'})
         }
 
         return res.json({ message: 'Hero deleted successfully.', data: deleteHero })

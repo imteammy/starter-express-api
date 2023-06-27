@@ -14,7 +14,7 @@ exports.getAll = async (req, res, next) => {
     }
 }
 
-exports.getbyid = async (req, res, next) => {
+exports.getByID = async (req, res, next) => {
     const id = req.body.id
     
     try {

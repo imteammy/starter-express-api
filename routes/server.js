@@ -34,7 +34,7 @@ module.exports = (app) => {
   app.post("/items/delete", auth, items.delete);
 
   app.get("/herocombo", herocombo.getAll);
-  app.post("/herocombo/id", auth, herocombo.getbyid);
+  app.post("/herocombo/id", auth, herocombo.getByID);
   app.post("/herocombo/add", auth, herocombo.add);
   app.post("/herocombo/update", auth, herocombo.update);
   app.post("/herocombo/delete", auth, herocombo.delete);

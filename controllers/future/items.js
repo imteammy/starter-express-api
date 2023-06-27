@@ -15,8 +15,9 @@ exports.getAllItems = async (req, res) => {
 };
 
 exports.getByID = async (req, res) => {
+    const { id } = req.body;
     try {
-        const item = await Items.findOne({ _id: req.body.id });
+        const item = await Items.findOne({ _id: id });
         return res.json(item);
     } catch (error) {
         return res.status(400).send(error.message);

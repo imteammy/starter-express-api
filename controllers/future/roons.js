@@ -1,4 +1,3 @@
-
 const { Roons } = require('../../models')
 
 exports.getAll = async (req, res) => {
@@ -14,8 +13,9 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getID = async (req, res) => {
+  const { id } = req.body;
     try {
-        const roon = await Roons.findOne({ name: req.body.id });
+        const roon = await Roons.findOne({ id:id});
         return res.json(roon);
     } catch (error) {
         return res.status(400).send(error.message);
@@ -47,8 +47,9 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
+  const { id } = req.body;
     try {
-        await Roons.findOneAndDelete({ _id: req.body.id });
+        await Roons.findOneAndDelete({ _id: id});
         return res.json("Delete Roon success");
     } catch (error) {
         return res.status(400).send(error.message);
@@ -60,9 +61,6 @@ exports.add = async (req, res) => {
     delete d.token;
     try {
         const result = await Roons.create(d);
-        if(!result){
-            return res.json({ success: "Add roon success", message: roon });
-        }
         return res.json({ success: "Add roon success", message: roon });
     } catch (error) {
         return res.status(400).send(error.message);

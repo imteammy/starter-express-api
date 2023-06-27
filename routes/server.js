@@ -9,7 +9,7 @@ const {
 } = require("../controllers/index");
 
 const { auth } = require("../middleware/auth");
-const login = require("../controllers/future/login");
+const login = require("../controllers/page/login");
 
 module.exports = (app) => {
 

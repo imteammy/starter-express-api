@@ -1,4 +1,4 @@
-const { TierList } = require('../../models');
+const { TierList } = require("@models");
 exports.getAll = async (req, res) => {
   try {
     const r = await TierList.findOne({});
@@ -11,7 +11,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
-exports.add = (req, res) => {
+exports.create = (req, res) => {
   try {
     const r = TierList.create({ image: req.body.image });
     return res.status(200).send(r);

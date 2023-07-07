@@ -1,5 +1,4 @@
-const express = require("express");
-const { Hero } = require("../../models");
+const { Hero } = require("@models");
 
 exports.getAllHeroes = async (req, res, next) => {
   try {
@@ -32,7 +31,7 @@ exports.findhero = async (req, res, next) => {
   }
 };
 
-exports.add = async (req, res, next) => {
+exports.create = async (req, res, next) => {
   const HeroData = req.body;
 
   delete HeroData.token;
@@ -45,7 +44,7 @@ exports.add = async (req, res, next) => {
     return res.json({ message: error.message });
   }
 };
-exports.addMany = async (req, res, next) => {
+exports.createMany = async (req, res, next) => {
   const d = req.body;
   delete d.token;
 

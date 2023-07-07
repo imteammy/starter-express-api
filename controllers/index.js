@@ -1,10 +1,10 @@
-const hero = require('./page/hero');
-const tierlist = require('./page/tierlist');
-const items = require('./page/items');
-const herocombo = require('./page/herocombo');
-const roons = require('./page/roons');
-const challengersskill = require('./page/challengerskills')
-const latensskill = require('./page/latensskill')
+const hero = require('./future/hero');
+const tierlist = require('./future/tierlist');
+const items = require('./future/items');
+const herocombo = require('./future/herocombo');
+const roons = require('./future/roons');
+const challengersskill = require('./future/challengerskills')
+const latensskill = require('./future/latensskill')
 module.exports = {
     hero,
     tierlist,

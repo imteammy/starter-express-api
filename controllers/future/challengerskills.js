@@ -1,4 +1,4 @@
-const { ChallengerSkills } = require("../../models");
+const { ChallengerSkills } = require("@models");
 
 exports.getAll = async (req, res, next) => {
   try {
@@ -28,7 +28,7 @@ exports.update = async (req, res) => {
   try {
     const filter = { _id: data.id };
     const update = { $set: data };
-    const r = await ChallengerSkills.findOneAndUpdate({ new: true });
+    const r = await ChallengerSkills.findOneAndUpdate(filter, update, { new: true });
     if (!r) {
       return res.json({ message: "ChallengerSkills not found" });
     }
@@ -51,7 +51,7 @@ exports.delete = async (req, res) => {
   }
 };
 
-exports.add = async (req, res) => {
+exports.create = async (req, res) => {
   const d = req.body;
   delete d.token;
   try {

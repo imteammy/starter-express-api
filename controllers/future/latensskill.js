@@ -1,4 +1,4 @@
-const { LatensSkills } = require('../../models')
+const { LatensSkills } = require("@models")
 
 exports.getAll = async (req, res) => {
     try {
@@ -51,7 +51,7 @@ exports.delete = async (req, res) => {
     }
 };
 
-exports.add = async (req, res) => {
+exports.create = async (req, res) => {
     const d = req.body;
     try {
         const skill = new LatensSkills(d);

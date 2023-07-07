@@ -1,4 +1,4 @@
-const { Items } = require('../../models');
+const { Items } = require("@models");
 
 exports.getAllItems = async (req, res) => {
     try {
@@ -57,7 +57,7 @@ exports.delete = async (req, res) => {
     }
 };
 
-exports.add = async (req, res) => {
+exports.create = async (req, res) => {
     const data = req.body;
     delete data.token
     try {

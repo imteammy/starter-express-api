@@ -1,4 +1,4 @@
-const { ComboHero } = require("../../models");
+const { ComboHero } = require("@models");
 
 exports.getAll = async (req, res, next) => {
   try {
@@ -27,7 +27,7 @@ exports.getByID = async (req, res, next) => {
   }
 };
 
-exports.add = async (req, res, next) => {
+exports.create = async (req, res, next) => {
   const d = req.body;
   delete d.token;
   try {

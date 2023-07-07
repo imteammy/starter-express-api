@@ -1,4 +1,4 @@
-const { Roons } = require('../../models')
+const { Roons } = require("@models")
 
 exports.getAll = async (req, res) => {
     try {
@@ -56,12 +56,12 @@ exports.delete = async (req, res) => {
     }
 };
 
-exports.add = async (req, res) => {
+exports.create = async (req, res) => {
     const d = req.body;
     delete d.token;
     try {
         const result = await Roons.create(d);
-        return res.json({ success: "Add roon success", message: roon });
+        return res.json({ success: "Add roon success", message: result });
     } catch (error) {
         return res.status(400).send(error.message);
     }

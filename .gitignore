@@ -1,4 +1,16 @@
 node_modules
-*.lock
+src/test
+
+
+.env
+.lock
+
+
+
+
+
 test
 jest.config.js
+
+
+

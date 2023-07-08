@@ -1,0 +1,1 @@
+let e=e=>require(e),s=e("express"),r=s(),o=e("cors"),n=e("path"),t=process.env.PORT||3001;require("./aliases"),require("dotenv").config(),r.use(o()),r.use(s.json()),r.use(s.urlencoded({extended:!1}));let l=e("@route/server");l(r);let i=e("@config/database");i(),r.listen(t,(()=>{console.log("> Server is running on http://localhost:"+t)}));

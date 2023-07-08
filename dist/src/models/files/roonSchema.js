@@ -1,0 +1,1 @@
+let e=require("mongoose"),o=require("./d");exports.roonSchema=new e.Schema({name:o,color:o,image:o,effect:o});

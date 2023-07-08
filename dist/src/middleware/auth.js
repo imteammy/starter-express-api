@@ -1,0 +1,1 @@
+exports.auth=async(r,e,o)=>{let{token:n}=r.body;return n&&""!==n&&void 0!==n?"12345"===n?o():e.json({error:"Invalid token!"}):e.status(200).json({error:"Token is required"})};

@@ -1,0 +1,1 @@
+let e=require("mongoose"),o=require("./d");exports.latensSkillsSchema=new e.Schema({name:o,image:o,effect:o,color:o});

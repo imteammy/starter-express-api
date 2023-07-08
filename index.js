@@ -1,19 +1,20 @@
-const express = require('express');
+const r = (r) => require(r);
+const express = r('express');
 const app = express();
-const cors = require('cors');
-const path = require('path');
+const cors = r('cors');
+const path = r('path');
+const PORT = process.env.PORT || 3001;
 require('./aliases');
+require('dotenv').config()
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const routes = require('@route/server');
+const routes = r('@route/server');
 routes(app);
-const connectDB = require('@config/database');
+const connectDB = r('@config/database');
 connectDB();
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('> Server is running on http://localhost:3000');
-
-  // Remove the GraphQL code that was previously here
+app.listen(PORT, () => {
+  console.log('> Server is running on http://localhost:'+PORT);
 });

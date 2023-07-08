@@ -53,6 +53,6 @@ module.exports = (app) => {
   app.post('/latensskill/id', auth, latensskill.getID);
   app.post('/latensskill/add', auth, latensskill.create);
   app.post('/latensskill/update', auth, latensskill.update);
-  app.delete('/latensskill/delete', auth, latensskill.delete);
+  app.post('/latensskill/delete', auth, latensskill.delete);
 
 };

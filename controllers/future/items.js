@@ -49,9 +49,14 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
+    const { id } = req.body;
     try {
-        await Items.findOneAndDelete({ name: req.body.name });
-        return res.json("Delete Item success");
+        const r = await Items.findOneAndDelete({_id: id});
+        console.log(r);
+        if(r === null) {
+            return res.json({ message: "Item not found." });
+        }
+        return res.json({ message : "Delete Item success"});
     } catch (error) {
         return res.status(400).send(error.message);
     }

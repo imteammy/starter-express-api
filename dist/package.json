@@ -1,6 +1,6 @@
 {
   "name": "starter-express-api",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "rov-api by peerawat",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "clean": "npm cache clean --force",
     "dev": "nodemon index.js",
     "dist": "rm -rf ./dist",
-    "build": "gulp product && cd .. && cd api-b && git add . && git commit -am \"version 1.0.6\" && git push --force"
+    "b": "gulp product && cd .. && cd api-b && git add . && git commit -am \"version 1.0.8\" && git push --force"
   },
   "repository": {
     "type": "git",

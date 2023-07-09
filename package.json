@@ -1,14 +1,16 @@
 {
   "name": "starter-express-api",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "rov-api by peerawat",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "jest",
+    "kill": "npx npkill",
+    "clean": "npm cache clean --force",
     "dev": "nodemon index.js",
-    "dev2": "nodemon test.js",
-    "css": "npx tailwindcss -i ./public/css/index.css -o ./dist/index.css --watch"
+    "dist": "rm -rf ./dist",
+    "build": "gulp product && cd .. && cd api-b && git add . && git commit -am \"version 1.0.6\" && git push --force"
   },
   "repository": {
     "type": "git",
@@ -21,20 +23,20 @@
   },
   "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "module-alias": "^2.2.3",
+    "mongoose": "^7.3.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
     "axios": "^1.4.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-plugin-alias": "^1.2.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
     "gulp-babel": "^8.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.1.4",
-    "module-alias": "^2.2.3",
-    "mongoose": "^7.3.2"
-  },
-  "devDependencies": {
     "babel-plugin-module-resolver": "^5.0.0",
     "gulp": "^4.0.2",
     "gulp-terser": "^2.1.0",

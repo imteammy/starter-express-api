@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-let d = require('./d');
+let d = require('./t');
 exports.itemSchema = new mongoose.Schema({
     name: d,
     image: d,

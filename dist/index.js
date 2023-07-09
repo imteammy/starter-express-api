@@ -1,1 +1,20 @@
-let e=e=>require(e),s=e("express"),r=s(),o=e("cors"),n=e("path"),t=process.env.PORT||3001;require("./aliases"),require("dotenv").config(),r.use(o()),r.use(s.json()),r.use(s.urlencoded({extended:!1}));let l=e("@route/server");l(r);let i=e("@config/database");i(),r.listen(t,(()=>{console.log("> Server is running on http://localhost:"+t)}));
+let e = e => require(e),
+  s = e('express'),
+  o = s(),
+  r = e('cors'),
+  n = process.env.PORT || 3001
+e('./aliases'),
+  e('dotenv').config(),
+  o.use(r()),
+  o.use(s.json()),
+  o.use(s.urlencoded({ extended: !1 })),
+  o.use((e, s, o) => {
+    s.status(404).json({ error: 'Error 404 page not found' })
+  })
+let t = e('@route/server')
+t(o)
+let l = e('@config/database')
+l(),
+  o.listen(n, e => {
+    console.log('> Server is running on http://localhost:' + n)
+  })

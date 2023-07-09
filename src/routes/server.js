@@ -10,7 +10,7 @@ const {
 
 const { auth } = require("@middleware/auth");
 
-module.exports = (app) => {
+module.exports = app => {
   const ti = "/tierlist/";
   app.get(ti, tierlist.getAll);
   app.post(ti + "/add", auth, tierlist.create);

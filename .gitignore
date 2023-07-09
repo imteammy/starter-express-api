@@ -1,5 +1,9 @@
 node_modules
 src/test
+.historty
+/.historty
+.historty/
+
 
 
 .env

@@ -1,4 +1,4 @@
-const r = (r) => require(r);
+const r = r => require(r);
 const f = './future/'
 const hero = r(f+'hero');
 const tierlist = r(f+'tierlist');

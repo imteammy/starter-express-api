@@ -1,1 +1,0 @@
-let e=require("mongoose"),r=require("./d");exports.tierListSchema=new e.Schema({image:r});

@@ -1,1 +1,0 @@
-exports.d={type:String,default:"null"};let e={type:String,default:"null"};exports.h={name:e,image:e,effect:e,cooldown:e},exports.i={name:e,image:e,price:e},exports.r={name:e,image:e,total:e},exports.l={name:e,image:e,effect:e},exports.c={name:e,image:e};

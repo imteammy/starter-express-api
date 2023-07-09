@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-let d = require('./d');
+let d = require('./t');
 exports.roonSchema = new mongoose.Schema({
     name: d,
     color: d,

@@ -1,4 +1,4 @@
-const r = (r) => require(r);
+const r = r => require(r);
 const mongoose = r("mongoose");
 const f = './files/'
 const heroSchema = r(f+'heroes');

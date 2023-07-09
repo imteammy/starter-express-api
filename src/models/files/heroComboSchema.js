@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-let d = require("./d");
+let d = require("./t");
 let a = {
   name: d,
   image: d,

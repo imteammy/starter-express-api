@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
-let { d, h, i, r , l , c} = require("./d");
+let d = require("./t");
+let h = { name: d, image: d, effect: d, cooldown: d };
+let i = { name: d, image: d, price: d };
+let r = { name: d, image: d, total: d };
+let l = { name: d, image: d, effect: d };
+let c = { name: d, image: d };
+
 exports.heroSchema = new mongoose.Schema({
   name: d,
   story: d,

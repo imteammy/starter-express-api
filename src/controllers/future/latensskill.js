@@ -41,7 +41,7 @@ exports.update = async (req, res) => {
     }
 };
 
-exports.delete = async (req, res) => {
+exports.remove = async (req, res) => {
     const { id } = req.body;
     try {
         await LatensSkills.findOneAndDelete({ _id: id });

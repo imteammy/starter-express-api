@@ -61,7 +61,7 @@ exports.update = async (req, res, next) => {
   }
 };
 
-exports.delete = async (req, res, next) => {
+exports.remove = async (req, res, next) => {
   const { id } = req.body;
   try {
     const r = await ComboHero.findOneAndDelete({ _id: id });

@@ -38,7 +38,7 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.delete = async (req, res) => {
+exports.remove = async (req, res) => {
   const { id } = req.body;
   try {
     const r = await ChallengerSkills.findOneAndDelete({ _id: id });

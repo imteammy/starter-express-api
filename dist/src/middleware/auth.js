@@ -1,1 +1,7 @@
-exports.auth=async(e,o,r)=>{let{token:n}=e.body;n&&""!==n||o.status(200).json({error:"Token is required"}),"12345"===n&&r(),"12345"!=n&&o.json({error:"Invalid token!"})};
+exports.auth = async (r, e, o) => {
+  let { token: t } = r.body
+  return t && '' !== t
+    ? ('12345' === t && o(),
+      '12345' != t ? e.status(401).json({ error: 'Invalid token!' }) : void 0)
+    : e.status(401).json({ error: 'Token is required' })
+}

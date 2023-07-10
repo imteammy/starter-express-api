@@ -1,1 +1,77 @@
-let{Hero:e}=require("@models"),{nc:t}=require("@config/node"),s=300;exports.getAll=async(n,r)=>{let a=t.get("Heroes");if(a)return r.json(a);try{let n=await e.find({});if(!n){let e={message:"Heroes is empty."};return t.set("Heroes",e,s),r.json(e)}return t.set("Heroes",n,s),r.status(200).json(n)}catch(o){return o.message}},exports.getID=async(s,n)=>{let{id:r}=s.body,a=t.get(r);if(a)return n.json(a);try{let s=await e.findOne({_id:r});if(!s){let e={message:"Hero not found!"};return t.set(r,e),n.json(e)}return t.set(r,s),n.send(s)}catch(o){return n.send(o.message)}},exports.create=async(t,s)=>{let{id:n}=t.body;delete n.token;try{let t=await e.create(n);return s.status(200).json({message:"Created new hero successfully.",data:t})}catch(r){return s.json({message:r.message})}},exports.createMany=async(t,s)=>{let n=t.body;delete n.token;let r=n.map((e=>{let{token:t,...s}=e;return s}));try{let t=await e.insertMany(r);return s.status(200).json({message:"Created new hero successfully.",data:t})}catch(a){return s.json({message:a.message})}},exports.update=async(t,s)=>{let n=t.body;delete n.token;try{let t={_id:n.id},r=Object.assign({},n),a=await e.findOneAndUpdate(t,r,{"new":!0});return a?s.status(200).json({message:"Hero updated successfully.",data:a}):s.send("Hero not found.")}catch(r){return s.status(400).json({message:r.message})}},exports.remove=async(t,s)=>{let{id:n}=t.body;try{let t=await e.findOneAndDelete({_id:n});return t?s.status(200).json({message:"Hero deleted successfully.",data:t}):s.json({message:"Find Hero by ID not found. Cannot delete"})}catch(r){return s.json({message:r.message})}};
+let { Hero: e } = require('@models'),
+  { nc: s } = require('@config/node'),
+  t = 300
+;(exports.getAll = async (a, n) => {
+  let o = s.get('Heroes')
+  if (o) return n.json(o)
+  await e
+    .find({})
+    .then(e =>
+      hero
+        ? (s.set('Heroes', hero, t), n.status(200).json(hero))
+        : n.status(200).json({ message: 'Heroes is empty.' })
+    )
+    ['catch'](e => e.message)
+}),
+  (exports.getID = async (t, a) => {
+    let { id: n } = t.body,
+      o = s.get(n)
+    if (o) return a.json(o)
+    await e
+      .findOne({ _id: n })
+      .then(e =>
+        hero ? (s.set(n, e), a.json(e)) : a.json({ message: 'Hero not found!' })
+      )
+      ['catch'](e => a.status(500).json({ message: e.message }))
+  }),
+  (exports.create = async (s, t) => {
+    let a = s.body
+    delete a.token,
+      await e
+        .create(a)
+        .then(e =>
+          t.status(200).json({ message: 'Create hero success.', data: e })
+        )
+        ['catch'](e => t.status(500).json({ message: e.message }))
+  }),
+  (exports.createMany = async (s, t) => {
+    let a = s.body
+    delete a.token
+    let n = a.map(e => {
+      let { token: s, ...t } = e
+      return t
+    })
+    await e
+      .insertMany(n)
+      .then(e =>
+        t
+          .status(200)
+          .json({ message: 'Create many hero successfully.', data: e })
+      )
+      ['catch'](e => t.status(500).json({ message: e.message }))
+  }),
+  (exports.update = async (s, t) => {
+    let a = s.body
+    delete a.token
+    let n = { _id: a.id },
+      o = Object.assign({}, a)
+    await e
+      .findOneAndUpdate(n, o, { new: !0 })
+      .then(e =>
+        e
+          ? t.status(200).json({ message: 'Hero updated success.', data: e })
+          : t.send('Hero not found.')
+      )
+      ['catch'](e => t.status(400).json({ message: e.message }))
+  }),
+  (exports.remove = async (s, t) => {
+    let { id: a } = s.body
+    await e
+      .findOneAndDelete({ _id: a })
+      .then(e =>
+        e
+          ? t.status(200).json({ message: 'Delete hero success.', data: e })
+          : t.json({ message: 'Hero not found for delete.' })
+      )
+      ['catch'](e => t.status(500).json({ message: e.message }))
+  })

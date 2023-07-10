@@ -1,17 +1,16 @@
 const mongoose = require('mongoose');
 
 const connectDB = async p => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      connectTimeoutMS: 30000
+  await mongoose.connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    connectTimeoutMS: 30000
+  })
+    .then((r) => {
+      console.log('> MongoDB connected');
+    }).catch((err) => {
+      console.error(error.message);
     });
-    console.log('> MongoDB connected');
-  } catch (error) {
-    console.error(error.message);
-    process.exit(1);
-  }
 };
 
 module.exports = connectDB;

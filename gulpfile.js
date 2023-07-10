@@ -51,5 +51,16 @@ gulp.task("copy-final", function () {
     .src(["package.json", ".env"])
     .pipe(gulp.dest(productDir));
 });
+
+gulp.task("test-js", function () {
+  return gulp
+    .src([
+      path.join('test', "**/*.js"),
+    ])
+    .pipe(replace(/const /g, "let "))
+    .pipe(babel())
+    .pipe(terser({ mangle: { toplevel: true },compress:true, sourceMap: true, ie8:true })) // Minify JavaScript and mangle variable names
+    .pipe(gulp.dest('dist test')); // Destination for the minified files
+});
 gulp.task("default", gulp.parallel("minify-js", "copy-a"));
 gulp.task("product", gulp.parallel("final", "copy-final"));

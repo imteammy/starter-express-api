@@ -1,67 +1,97 @@
 const { ChallengerSkills } = require("@models");
 const { nc } = require("@config/node");
 const time = 300;
+
 exports.getAll = async (req, res, next) => {
-  try {
-    const r = await ChallengerSkills.find({});
-    if (r.length === 0) {
-      return res.json({ message: "ChallengerSkills is empty" });
-    }
-    return res.json(r);
-  } catch (error) {
-    return res.send(error.message);
-  }
+  const c = nc.get("Challengers");
+  if (c) { return res.json(c); };
+  await ChallengerSkills.find({})
+    .then((r) => {
+      if (r.length === 0) {
+        return res
+          .status(400)
+          .json({ message: "ChallengerSkills is empty" });
+      };
+      nc.set("Challengers", r, time);
+      return res
+        .status(200)
+        .json(r);
+    }).catch((err) => {
+      return res
+        .status(500)
+        .json({ message: err.message });
+    });
 };
 
 exports.getID = async (req, res) => {
   const id = req.body;
-  try {
-    const r = await ChallengerSkills.findOne({ _id: id });
-    return res.json(r);
-  } catch (error) {
-    return res.send(error.message);
-  }
+  const c = nc.get(id);
+  if (c) { return res.json(c); };
+  await ChallengerSkills.findOne({ _id: id })
+    .then((r) => {
+      if (r.lenght === 0) {
+        return res
+          .status(400)
+          .json({ message: 'Challenge not found' });
+      }
+      nc.set(id, r, time);
+      return res.json(r);
+    }).catch((err) => {
+      return res.status(500).json({ message: err.message });
+    });
 };
 
 exports.update = async (req, res) => {
   const data = req.body;
   delete data.token;
-  try {
-    const filter = { _id: data.id };
-    const update = { $set: data };
-    const r = await ChallengerSkills.findOneAndUpdate(filter, update, { new: true });
-    if (r.lenght === 0) return res.json({ message: "ChallengerSkills not found" });
-    
-    return res.json(r);
-  } catch (error) {
-    return res.json(error.message);
-  }
+  const id = { _id: data.id };
+  const update = { $set: data };
+  await ChallengerSkills.findOneAndUpdate(id, update, { new: true })
+    .then((r) => {
+      if (r.lenght === 0) {
+        return res
+          .status(400)
+          .json({ message: "ChallengerSkills not found for update." });
+      };
+      return res
+        .status(200)
+        .json(r);
+    }).catch((err) => {
+      return res
+        .status(500)
+        .json(error.message);
+    });
 };
 
 exports.remove = async (req, res) => {
   const { id } = req.body;
-  try {
-    const r = await ChallengerSkills.findOneAndDelete({ _id: id });
-    if (r.lenght === 0) return res.json({ message: "Challenger not found!" });
-    return res.json({ message: "Delete ChallengerSkill success", data: r });
-  } catch (error) {
-    return res.json(error.message);
-  }
+  await ChallengerSkills.findOneAndDelete({ _id: id })
+    .then((result) => {
+      if (r.lenght === 0) {
+        return res
+          .status(400)
+          .json({ message: "Challenger not found for remove!" });
+      };
+      return res
+        .status(200)
+        .json({ message: "Delete ChallengerSkill success", data: r });
+    }).catch((err) => {
+      return res
+        .status(500)
+        .json(error.message);
+    });
 };
 
 exports.create = async (req, res) => {
   const d = req.body;
   delete d.token;
-  try {
-    const r = await ChallengerSkills.create(d);
-    if (r.lenght === 0) {
-      return res.json({
-        message: "Cannot Create  ChallengerSkills",
-        data: r,
-      });
-    }
-    return res.json({ success: "Add skill success", message: r });
-  } catch (error) {
-    return res.status(400).send(error.message);
-  }
+  await ChallengerSkills.create(d).then((r) => {
+    return res
+      .status(400)
+      .json({ success: "Creat Challengers Skill Success", message: r });
+  }).catch((err) => {
+    return res
+      .status(500)
+      .json({ message: err.message });
+  });
 };

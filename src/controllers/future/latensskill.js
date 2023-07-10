@@ -1,63 +1,63 @@
 const { LatensSkills } = require("@models")
-
-exports.getAll = async (req, res) => {
-    try {
-        const skills = await LatensSkills.find({});
-        if (skills.length === 0) {
-            return res.json({ message: "LatensSkills is empty." })
-        }
-        return res.send(skills);
-    } catch (error) {
-        return res.status(400).send(error.message);
-    }
+const { nc } = require("@config/node");
+const time = 300;
+exports.getAll = async (_, res) => {
+    const c = nc.get("Latens");
+    if (c) {return res.status(200).json(c);}
+    await LatensSkills.find({})
+        .then((r) => {
+            if (r.length === 0) {return res.json({ message: "LatensSkills is empty." });};
+            nc.set("Latens", r, time);
+            return res.send(r);
+        })
+        .catch((error) => {
+            return res.status(500).json({ message: "Internal Server Error" });
+        });
 };
 
 exports.getID = async (req, res) => {
-  const { id } = req.body;
-    try {
-        const skill = await LatensSkills.findOne({ _id : id});
-        return res.json(skill);
-    } catch (error) {
-        return res.status(400).send(error.message);
-    }
+    const { id } = req.body;
+    const c = nc.get(id);
+    if (c) return res.status(200).json(c);
+    await LatensSkills.findOne({ _id: id }).then((r) => {
+        if (r.length === 0) {return res.json({ message: "LatensSkills is empty." })}
+        nc.set(id, r, time);
+        return res.send(r);
+    }).catch((err) => {
+        return res.status(500).json({ message: "Internal Server Error" });
+    });
 };
 
+exports.create = async (req, res) => {
+    const data = req.body;
+    delete data.token;
+    const d = new LatensSkills(data);
+    await d.save().then((r) => {
+        return res.status.json({ success: "Create Latens Skill success", message: r });
+    }).catch((err) => {
+        return res.status.json({ error: err.message });
+    });
+
+};
 exports.update = async (req, res) => {
     const data = req.body;
     delete data.token;
-    try {
-
-        const filter = { _id: data.id };
-        const update = { $set: data };
-        const updateRusult = await LatensSkills.findOneAndUpdate(filter, update, { new: true });
-
-        if (!updateRusult) {
-            return res.status(400).send("Update LatensSkill fail");
-        }
-        return res.json({ success: "Update LatensSkill success", message: updateRusult });
-
-    } catch (error) {
-        return res.status(400).send(error.message);
-    }
+    const filter = { _id: data.id };
+    const update = { $set: data };
+    await LatensSkills.findOneAndUpdate(filter, update, { new: true }).then((r) => {
+        return res.json({ success: "Update LatensSkill success", message: r });
+    }).catch((err) => {
+        return res.json({ error: err.message });
+    });
 };
 
 exports.remove = async (req, res) => {
     const { id } = req.body;
-    try {
-        await LatensSkills.findOneAndDelete({ _id: id });
-        return res.json("Delete LatensSkill success");
-    } catch (error) {
-        return res.status(400).send(error.message);
-    }
+    await LatensSkills.findOneAndDelete({ _id: id }).then((r) => {
+        return res.json({ message: "Delete LatensSkill success." });
+    }).catch((err) => {
+        return res.json({ message: err.message });
+    });
+
 };
 
-exports.create = async (req, res) => {
-    const d = req.body;
-    try {
-        const skill = new LatensSkills(d);
-        await skill.save();
-        return res.json({ success: "Create Latens Skill success", message: skill });
-    } catch (error) {
-        return res.status(400).send(error.message);
-    }
-};

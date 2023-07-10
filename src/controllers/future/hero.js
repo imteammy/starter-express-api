@@ -1,42 +1,48 @@
 const { Hero } = require("@models");
+const { nc } = require("@config/node");
+const time = 300;
 
-exports.getAllHeroes = async (req, res, next) => {
+exports.getAll = async (_, res) => {
+  const c = nc.get("Heroes");
+  if (c) return res.json(c);
   try {
     const hero = await Hero.find({});
-
-    if (hero.length === 0) {
-      return res.json({ message: "Heroes is empty." });
+    if (!hero) {
+      let m = { message: "Heroes is empty." };
+      nc.set("Heroes", m, time);
+      return res.json(m);
     }
-
+    nc.set("Heroes", hero, time);
     return res.status(200).json(hero);
   } catch (error) {
     return error.message;
   }
 };
 
-exports.findhero = async (req, res, next) => {
-  const id = req.body.id;
+exports.getID = async (req, res) => {
+  const { id } = req.body;
+  const c = nc.get(id);
+  if (c) return res.json(c);
 
-  if (!id || id == "") {
-    return res.send({ message: "ID is required" });
-  }
   try {
     const hero = await Hero.findOne({ _id: id });
     if (!hero) {
-      return res.json({ message: "Hero not found!" });
+      let m  = { message: "Hero not found!" };
+      nc.set(id, m);
+      return res.json(m);
     }
+    nc.set(id, hero);
     return res.send(hero);
   } catch (error) {
     return res.send(error.message);
   }
 };
 
-exports.create = async (req, res, next) => {
-  const HeroData = req.body;
-
-  delete HeroData.token;
+exports.create = async (req, res) => {
+  const {id} = req.body;
+  delete id.token;
   try {
-    const result = await Hero.create(HeroData);
+    const result = await Hero.create(id);
     return res
       .status(200)
       .json({ message: "Created new hero successfully.", data: result });
@@ -44,7 +50,7 @@ exports.create = async (req, res, next) => {
     return res.json({ message: error.message });
   }
 };
-exports.createMany = async (req, res, next) => {
+exports.createMany = async (req, res) => {
   const d = req.body;
   delete d.token;
 
@@ -62,7 +68,7 @@ exports.createMany = async (req, res, next) => {
     return res.json({ message: error.message });
   }
 };
-exports.update = async (req, res, next) => {
+exports.update = async (req, res) => {
   const data = req.body;
   delete data.token;
   try {
@@ -85,7 +91,7 @@ exports.update = async (req, res, next) => {
   }
 };
 
-exports.remove = async (req, res, next) => {
+exports.remove = async (req, res) => {
   const { id } = req.body;
   try {
     const deleteHero = await Hero.findOneAndDelete({ _id: id });

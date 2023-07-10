@@ -17,23 +17,23 @@ module.exports = app => {
   app.post(ti + "update", auth, tierlist.update);
 
   const he = "/hero/";
-  app.get(he, hero.getAllHeroes);
-  app.post(he + "id", auth, hero.findhero);
+  app.get(he, hero.getAll);
+  app.post(he + "id", auth, hero.getID);
   app.post(he + "add", auth, hero.create);
   app.post(he + "addmany", hero.createMany);
   app.post(he + "update", auth, hero.update);
   app.post(he + "delete", auth, hero.remove);
 
   const it = '/items/';
-  app.get(it, items.getAllItems);
-  app.post(it + "id", auth, items.getByID);
+  app.get(it, items.getAll);
+  app.post(it + "id", auth, items.getID);
   app.post(it + "add", auth, items.create);
   app.post(it + "update", auth, items.update);
   app.post(it + "delete", auth, items.remove);
 
   const hc = "/herocombo/";
   app.get(hc, herocombo.getAll);
-  app.post(hc + "id", auth, herocombo.getByID);
+  app.post(hc + "id", auth, herocombo.getID);
   app.post(hc + "add", auth, herocombo.create);
   app.post(hc + "update", auth, herocombo.update);
   app.post(hc + "delete", auth, herocombo.remove);

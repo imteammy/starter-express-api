@@ -1,5 +1,6 @@
 const { ChallengerSkills } = require("@models");
-
+const { nc } = require("@config/node");
+const time = 300;
 exports.getAll = async (req, res, next) => {
   try {
     const r = await ChallengerSkills.find({});
@@ -29,9 +30,8 @@ exports.update = async (req, res) => {
     const filter = { _id: data.id };
     const update = { $set: data };
     const r = await ChallengerSkills.findOneAndUpdate(filter, update, { new: true });
-    if (!r) {
-      return res.json({ message: "ChallengerSkills not found" });
-    }
+    if (r.lenght === 0) return res.json({ message: "ChallengerSkills not found" });
+    
     return res.json(r);
   } catch (error) {
     return res.json(error.message);
@@ -42,9 +42,7 @@ exports.remove = async (req, res) => {
   const { id } = req.body;
   try {
     const r = await ChallengerSkills.findOneAndDelete({ _id: id });
-    if (!r) {
-      return res.json({ message: "Challenger not found!" });
-    }
+    if (r.lenght === 0) return res.json({ message: "Challenger not found!" });
     return res.json({ message: "Delete ChallengerSkill success", data: r });
   } catch (error) {
     return res.json(error.message);
@@ -56,9 +54,9 @@ exports.create = async (req, res) => {
   delete d.token;
   try {
     const r = await ChallengerSkills.create(d);
-    if (!r) {
+    if (r.lenght === 0) {
       return res.json({
-        message: "CannotAdd  ChallengerSkills",
+        message: "Cannot Create  ChallengerSkills",
         data: r,
       });
     }

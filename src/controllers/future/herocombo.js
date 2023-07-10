@@ -1,6 +1,9 @@
 const { ComboHero } = require("@models");
-
+const { nc } = require("@config/node");
+const time = 300;
 exports.getAll = async (req, res, next) => {
+  const c = nc.get('AllCombo');
+  if (c) return res.json(c);
   try {
     const r = await ComboHero.find({});
 
@@ -13,14 +16,12 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
-exports.getByID = async (req, res, next) => {
-  const id = req.body;
+exports.getID = async (req, res, next) => {
+  const {id} = req.body;
 
   try {
     const r = await ComboHero.find({ _id: id });
-    if (!r) {
-      return { message: "Combo not found!" };
-    }
+    if (r.length === 0) return { message: "Combo not found!" };
     return res.json(r);
   } catch (error) {
     return res.send(error.message);
@@ -47,11 +48,7 @@ exports.update = async (req, res, next) => {
     const r = await ComboHero.findOneAndUpdate(filter, update, {
       new: true,
     });
-
-    if (!r) {
-      return res.status(404).json({ message: "Hero not found." });
-    }
-
+    if (r.length === 0) return res.status(404).json({ message: "Hero not found." });
     return res.json({
       message: "Hero updated successfully.",
       data: r,
@@ -65,9 +62,7 @@ exports.remove = async (req, res, next) => {
   const { id } = req.body;
   try {
     const r = await ComboHero.findOneAndDelete({ _id: id });
-    if (!r) {
-      return res.status(404).json({ message: "Hero not found." });
-    }
+    if (r.length === 0) return res.status(404).json({ message: "Hero not found." });
     return res.json({ message: "Hero deleted successfully.", data: r });
   } catch (error) {
     return res.status(400).json({ message: error.message });

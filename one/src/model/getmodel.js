@@ -9,14 +9,14 @@ const getModel = (models) => {
       case 'roons':
         return RoonModel; 
       case 'tierlist':
-        return TierListModel; 
+        return TierlistModel; 
       case 'herocombos':
-        return HeroComboModel; 
+        return ComboModel; 
       case 'latens':
         return LatenModel; 
       case 'teams':
         return TeamModel; 
       default:
-        return null;
+        return false;
     }
   };

@@ -9,6 +9,20 @@ const HeroItemType = {
   image: SchemaType,
   price: SchemaType,
 }
+const HeroRoonType = {
+  name: SchemaType,
+  image: SchemaType,
+  total: SchemaType,
+}
+const HeroLatenType = {
+  name: SchemaType,
+  image: SchemaType,
+  effect: SchemaType,
+}
+const HeroComboType = {
+  name: SchemaType,
+  image: SchemaType,
+}
 
 const heroSchema = new mongoose.Schema({
     name: SchemaType,
@@ -31,21 +45,9 @@ const heroSchema = new mongoose.Schema({
       six: HeroItemType,
     },
     roons: {
-      one: {
-        name: SchemaType,
-        image: SchemaType,
-        total: SchemaType,
-      },
-      two: {
-        name: SchemaType,
-        image: SchemaType,
-        total: SchemaType,
-      },
-      three: {
-        name: SchemaType,
-        image: SchemaType,
-        total: SchemaType,
-      },
+      one: HeroRoonType,
+      two: HeroRoonType,
+      three: HeroRoonType,
     },
     challengerSkills: {
       name: SchemaType,
@@ -54,67 +56,24 @@ const heroSchema = new mongoose.Schema({
     },
     LatensSkills: {
       one: {
-        one: {
-          name: SchemaType,
-          image: SchemaType,
-          effect: SchemaType,
-        },
-        two: {
-          name: SchemaType,
-          image: SchemaType,
-          effect: SchemaType,
-        },
-        three: {
-          name: SchemaType,
-          image: SchemaType,
-          effect: SchemaType,
-        },
+        one: HeroLatenType,
+        two: HeroLatenType,
+        three: HeroLatenType,
       },
       two: {
-        one: {
-          name: SchemaType,
-          image: SchemaType,
-          effect: SchemaType,
-        },
-        two: {
-          name: SchemaType,
-          image: SchemaType,
-          effect: SchemaType,
-        },
+        one: HeroLatenType,
+        two: HeroLatenType,
       },
       three: {
-        one: {
-          name: SchemaType,
-          image: SchemaType,
-          effect: SchemaType,
-        },
-        two: {
-          name: SchemaType,
-          image: SchemaType,
-          effect: SchemaType,
-        },
+        one: HeroLatenType,
+        two: HeroLatenType,
       },
     },
     comboHero: {
-      one: {
-        name: SchemaType,
-        image: SchemaType,
-      },
-      two: {
-        name: SchemaType,
-        image: SchemaType,
-      },
-      three: {
-        name: SchemaType,
-        image: SchemaType,
-      },
-      four: {
-        name: SchemaType,
-        image: SchemaType,
-      },
-      five: {
-        name: SchemaType,
-        image: SchemaType,
-      },
+      one: HeroComboType,
+      two: HeroComboType,
+      three: HeroComboType,
+      four: HeroComboType,
+      five: HeroComboType,
     },
   });

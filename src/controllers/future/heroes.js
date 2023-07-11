@@ -76,7 +76,7 @@ exports.update = async (req, res) => {
 exports.remove = async (req, res) => {
   const { id } = req.body;
   await Hero.findOneAndDelete({ _id: id }).then((r) => {
-    if (r.legth === 0) { return res.json({ message: "Hero not found for delete." }); };
+    if (r.length === 0) { return res.json({ message: "Hero not found for delete." }); };
     return res
       .status(200)
       .json({ message: "Delete hero success.", data: r });

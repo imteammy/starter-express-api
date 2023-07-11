@@ -252,7 +252,7 @@ const GetAll = async (req, res) => {
   }
   await Model.find({})
     .then((r) => {
-      if (!r || r === undefined || r === null || r.lenght === undefined) {
+      if (!r || r.lenght === undefined) {
         return res.status(200).json({ message: `${models} is empty.` });
       }
       _nodeNC.set(models, r, timeOut);
@@ -277,7 +277,7 @@ const GetID = async (req, res) => {
 
   await Model.findOne({ _id: id })
     .then((r) => {
-      if (!r || r.lenght === 0) {
+      if (!r || r.lenght === undefined) {
         return res.json({ message: `${models} not found!` });
       }
       _nodeNC.set(id, r);

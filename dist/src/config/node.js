@@ -1,1 +1,0 @@
-let e=require("node-cache");exports.nc=new e;

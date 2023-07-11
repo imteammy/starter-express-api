@@ -60,7 +60,7 @@ gulp.task("test-js", function () {
     .pipe(replace(/const /g, "let "))
     .pipe(babel())
     .pipe(terser({ mangle: { toplevel: true },compress:true, sourceMap: true, ie8:true })) // Minify JavaScript and mangle variable names
-    .pipe(gulp.dest('dist test')); // Destination for the minified files
+    .pipe(gulp.dest('dist test')); 
 });
 gulp.task("default", gulp.parallel("minify-js", "copy-a"));
 gulp.task("product", gulp.parallel("final", "copy-final"));

@@ -5,7 +5,7 @@ const app = express();
 const cors = r("cors");
 const nodeCache = r("node-cache");
 const _node = new nodeCache();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000 ;
 
 r("./aliases");
 r("dotenv").config();

@@ -6,10 +6,10 @@ const connectDB = async p => {
     useUnifiedTopology: true,
     connectTimeoutMS: 30000
   })
-    .then((r) => {
+    .then(() => {
       console.log('> MongoDB connected');
     }).catch((err) => {
-      console.error(error.message);
+      console.error(err.message);
     });
 };
 

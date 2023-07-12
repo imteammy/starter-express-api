@@ -1,0 +1,30 @@
+GET http://localhost:4000/hero/ HTTP/1.1
+###
+GET http://localhost:4000/item/ HTTP/1.1
+###
+GET http://localhost:4000/roon/ HTTP/1.1
+###
+GET http://localhost:4000/challenger/ HTTP/1.1
+###
+GET http://localhost:4000/laten/ HTTP/1.1
+###
+GET http://localhost:4000/herocombo/ HTTP/1.1
+###
+GET http://localhost:4000/tierlist/ HTTP/1.1
+###
+GET http://localhost:4000/team/ HTTP/1.1
+###
+
+
+
+GET http://localhost:4000/ HTTP/1.1
+
+###
+
+POST http://localhost:4000/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}

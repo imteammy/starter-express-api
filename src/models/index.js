@@ -1,20 +1,19 @@
-const r = r => require(r);
-const mongoose = r("mongoose");
-const f = './files/'
-const heroSchema = r(f + 'heroes');
-const itemSchema = r(f + 'item');
-const heroComboSchema = r(f + 'heroComboSchema');
-const teamHeroSchema = r(f + 'teamHeroSchema');
-const roonSchema = r(f + 'roonSchema');
-const latensSkillsSchema = r(f + 'latensSkillsSchema');
-const ChallengerSkillsSchema = r(f + 'ChallengerSkillsSchema');
-const tierListSchema = r(f + 'tierListSchema');
+const mongoose = require("mongoose");
 
-exports.Items = mongoose.model("Items", itemSchema);
-exports.Hero = mongoose.model("Hero", heroSchema);
-exports.Roons = mongoose.model("Roons", roonSchema);
-exports.ComboHero = mongoose.model("ComboHero", heroComboSchema);
-exports.LatensSkills = mongoose.model("LatensSkills", latensSkillsSchema);
-exports.ChallengerSkills = mongoose.model("ChallengerSkills", ChallengerSkillsSchema);
-exports.TierList = mongoose.model("Tierlist", tierListSchema);
-exports.teamHero = mongoose.model("teamhero", teamHeroSchema);
+const HeroSchema = require('./schema/hero');
+const ItemSchema = require('./schema/item');
+const ComboSchema = require('./schema/combo');
+const TeamSchema = require('./schema/team');
+const RoonSchema = require('./schema/roon');
+const LatenSchema = require('./schema/laten');
+const ChallengerSchema = require('./schema/challenger');
+const TierSchema = require('./schema/tierlist');
+
+exports.HeroModel = mongoose.model("Hero", HeroSchema);
+exports.ItemModel = mongoose.model("Items", ItemSchema);
+exports.RoonModel = mongoose.model("Roons", RoonSchema);
+exports.ComboModel = mongoose.model("ComboHero", ComboSchema);
+exports.LatenModel = mongoose.model("LatensSkills", LatenSchema);
+exports.ChallengerModel = mongoose.model("ChallengerSkills", ChallengerSchema);
+exports.TierlistModel = mongoose.model("Tierlist", TierSchema);
+exports.TeamModel = mongoose.model("teamhero", TeamSchema);

@@ -1,3 +1,4 @@
 const nodecache = require('node-cache');
-exports.nc = new nodecache()
+const _nodeNC = new nodecache()
 
+module.exports = _nodeNC;

@@ -1,5 +1,4 @@
 const r = (r) => require(r);
-
 const express = r("express");
 const app = express();
 const cors = r("cors");
@@ -27,6 +26,6 @@ setInterval(() => {
   clearCache();
 }, HALF_HOUR);
 
-app.listen(PORT, (p) => {
+app.listen(PORT, () => {
   console.log("> Server is running on http://localhost:" + PORT);
 });

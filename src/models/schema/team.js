@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
 let d = require("./t");
 let a = {
   name: d,
   image: d,
 };
-exports.teamHeroSchema = new mongoose.Schema({
+exports.teamHeroSchema = new Schema({
   teamName: d,
   teamImage: d,
   team: {

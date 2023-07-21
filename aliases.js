@@ -1,10 +1,9 @@
 const moduleAlias = require("module-alias");
-let d = __dirname;
-let s = "/src/";
+let S = __dirname + /src/;
 moduleAlias.addAliases({
-  "@models": d + s + "models",
-  "@controllers": d + s + "controllers",
-  "@middleware": d + s + "middleware",
-  "@config": d + s + "config",
-  "@route": d + s + "routes",
+  "@models": S + "models",
+  "@controllers": S + "controllers",
+  "@middleware": S + "middleware",
+  "@config": S + "config",
+  "@route": S + "routes",
 });

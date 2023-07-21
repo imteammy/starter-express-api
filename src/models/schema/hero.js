@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
 let d = require("./t");
 let h = { name: d, image: d, effect: d, cooldown: d };
 let i = { name: d, image: d, price: d };
@@ -6,7 +6,7 @@ let r = { name: d, image: d, total: d };
 let l = { name: d, image: d, effect: d };
 let c = { name: d, image: d };
 
-exports.heroSchema = new mongoose.Schema({
+exports.heroSchema = new Schema({
   name: d,
   story: d,
   image: d,

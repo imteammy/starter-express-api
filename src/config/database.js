@@ -7,7 +7,7 @@ const connectDB = async p => {
     connectTimeoutMS: 30000
   })
     .then(() => {
-      console.log('> MongoDB connected');
+      console.log('> 💻 [ Database ] MongoDB connected');
     }).catch((err) => {
       console.error(err.message);
     });

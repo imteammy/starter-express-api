@@ -1,4 +1,4 @@
-const nodecache = require('node-cache');
-const _nodeNC = new nodecache()
+const nodeCache = require('node-cache');
+const NodeCache = new nodeCache()
 
-module.exports = _nodeNC;
+module.exports = NodeCache;

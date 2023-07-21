@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
 let d = require("./t");
 let a = {
   name: d,
@@ -11,7 +11,7 @@ let b = {
   four: a,
   five: a,
 };
-exports.heroComboSchema = new mongoose.Schema({
+exports.heroComboSchema = new Schema({
   comboName: d,
   comboImage: d,
   heroCombo: b,

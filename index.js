@@ -1,25 +1,25 @@
-const r = (r) => require(r);
-const express = r("express");
+const express = require("express");
 const app = express();
-const cors = r("cors");
-const nodeCache = r("node-cache");
+const cors = require("cors");
+const nodeCache = require("node-cache");
 const _node = new nodeCache();
-const PORT = process.env.PORT || 4000 ;
+const PORT = process.env.PORT || 4000;
 
-r("./aliases");
-r("dotenv").config();
+require("./aliases");
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const routes = r("@route/server");
+const routes = require("@route/server");
 routes(app);
-const connectDB = r("@config/database");
+const connectDB = require("@config/database");
 connectDB();
 
 const HALF_HOUR = 1800000;
 function clearCache() {
+  console.log("Clearing cache")
   _node.flushAll();
 }
 setInterval(() => {
@@ -27,5 +27,5 @@ setInterval(() => {
 }, HALF_HOUR);
 
 app.listen(PORT, () => {
-  console.log("> Server is running on http://localhost:" + PORT);
+  console.log("> 🚀 [ Server ] is running on http://localhost:" + PORT);
 });

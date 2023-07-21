@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 let d = require('./t');
-exports.tierListSchema = new mongoose.Schema({
-    image: d,
-  });
+exports.tierListSchema = new Schema({
+  image: d,
+});

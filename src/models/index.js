@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { model } = require("mongoose");
 
 const HeroSchema = require('./schema/hero');
 const ItemSchema = require('./schema/item');
@@ -9,11 +9,11 @@ const LatenSchema = require('./schema/laten');
 const ChallengerSchema = require('./schema/challenger');
 const TierSchema = require('./schema/tierlist');
 
-exports.HeroModel = mongoose.model("Hero", HeroSchema);
-exports.ItemModel = mongoose.model("Items", ItemSchema);
-exports.RoonModel = mongoose.model("Roons", RoonSchema);
-exports.ComboModel = mongoose.model("ComboHero", ComboSchema);
-exports.LatenModel = mongoose.model("LatensSkills", LatenSchema);
-exports.ChallengerModel = mongoose.model("ChallengerSkills", ChallengerSchema);
-exports.TierlistModel = mongoose.model("Tierlist", TierSchema);
-exports.TeamModel = mongoose.model("teamhero", TeamSchema);
+exports.HeroModel = model("Hero", HeroSchema);
+exports.ItemModel = model("Items", ItemSchema);
+exports.RoonModel = model("Roons", RoonSchema);
+exports.ComboModel = model("ComboHero", ComboSchema);
+exports.LatenModel = model("LatensSkills", LatenSchema);
+exports.ChallengerModel = model("ChallengerSkills", ChallengerSchema);
+exports.TierlistModel = model("Tierlist", TierSchema);
+exports.TeamModel = model("teamhero", TeamSchema);

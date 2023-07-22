@@ -1,8 +1,11 @@
 exports.auth = async (req, res, next) => {
   const { token } = req.body;
-  !token || token === ""
-    ? res.status(401).json({ error: "Token is required" })
-    : token !== "12345"
-      ? res.status(401).json({ error: "Invalid token!" })
-      : next();
+  if (!token) {
+    return res.status(401).json({ error: "Token is required" });
+  }
+  if (token === "12345") {
+    return next();
+  } else {
+    return res.status(401).json({ error: "Invalid token!" });
+  }
 };

@@ -7,9 +7,9 @@ const {
   RoonModel,
   TeamModel,
   TierlistModel,
-} = require("@models/");
+} = require("../models/");
 
-module.exports = getModel = async (models) => {
+module.exports = getModel = async function (models) {
   switch (models) {
     case "hero":
       return HeroModel;

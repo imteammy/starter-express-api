@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const nodeCache = require("node-cache");
+// const nodeCache = require("node-cache");
 
 const app = express();
 const NodeCache = new nodeCache();
@@ -12,8 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const routes = require("./src/routes/server");
-const connectDB = require("./src/config/database");
+// const routes = require("./src/routes/server");
+// const connectDB = require("./src/config/database");
 routes(app);
 connectDB();
 

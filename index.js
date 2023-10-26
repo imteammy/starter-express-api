@@ -4,7 +4,7 @@ const nodeCache = require("node-cache");
 
 const app = express();
 const NodeCache = new nodeCache();
-const PORT = process.env.PORT || 4000;
+// const PORT = process.env.PORT || 4000;
 
 require("dotenv").config();
 
